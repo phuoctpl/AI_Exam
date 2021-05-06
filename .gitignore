@@ -1,0 +1,10 @@
+# Tools / IDE
+.idea/
+
+# Build tools
+AI_Sample.egg-info/
+dist/
+build/
+
+# Result
+comment_tgdd.json
