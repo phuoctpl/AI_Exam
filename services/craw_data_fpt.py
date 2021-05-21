@@ -45,7 +45,7 @@ def get_review(link):
         extract_question(soup)
         while True:
             element0 = driver.find_element_by_id('f-comment-root')
-            element = element0.find_element_by_xpath("//a[@class='pagination-link' and @aria-label='Next']")
+            element = element0.find_element_by_xpath(".//i[@class='demo-icon icon-angle-right']")
             if element is None:
                 break
             element.click()
