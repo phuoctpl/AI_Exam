@@ -88,7 +88,7 @@ def get_data():
         thread.start()
     for thread in threads:
         thread.join()
-    write_file(output_path, products)
+    write_file_json(output_path, products)
     return products
 
 
@@ -101,7 +101,7 @@ def get_dat_no_thread():
         product = {'category': category['title']}
         products.append(product)
         get_product(items, product)
-    write_file(output_path, products)
+    write_file_json(output_path, products)
     return products
 
 

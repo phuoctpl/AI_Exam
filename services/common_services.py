@@ -9,6 +9,12 @@ def get_soup(url):
     return BeautifulSoup(page, 'html.parser')
 
 
-def write_file(path, data):
+def write_file_json(path, data):
     with io.open(path, 'w', encoding="utf-8") as output:
         json.dump(data, output, ensure_ascii=False)
+
+
+def write_file_text(path, data, label):
+    with io.open(path, 'w', encoding="utf-8") as output:
+        for text in data:
+            output.write(f"{label} {text}\n")
