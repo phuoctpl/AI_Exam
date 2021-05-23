@@ -15,6 +15,6 @@ def write_file_json(path, data):
 
 
 def write_file_text(path, data, label):
-    with io.open(path, 'w', encoding="utf-8") as output:
+    with io.open(path, 'a', encoding="utf-8") as output:
         for text in data:
             output.write(f"{label} {text}\n")
