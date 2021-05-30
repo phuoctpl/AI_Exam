@@ -1,5 +1,4 @@
 import flask
-from services import craw_data_tgdd
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -7,7 +6,9 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return craw_data_tgdd.get_data()
+    response = flask.Response("Test")
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    return response
 
 
 app.run()
