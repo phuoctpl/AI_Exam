@@ -4,3 +4,4 @@ requests==2.25.1
 selenium==3.141.0
 times==0.7
 jsonpath-ng==1.5.2
+pyvi==0.1

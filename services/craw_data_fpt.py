@@ -49,6 +49,7 @@ def get_review(link):
             reviews.append(match.value)
         print(reviews)
         write_file_text(output_question_file, extract_question(soup), '1')
+        write_file_text(question_for_classification_file, extract_question(soup))
         while True:
             element0 = driver.find_element_by_id('f-comment-root')
             element = element0.find_element_by_xpath(".//i[@class='demo-icon icon-angle-right']")
@@ -59,29 +60,35 @@ def get_review(link):
             html = driver.page_source
             soup = BeautifulSoup(html, "html.parser")
             write_file_text(output_question_file, extract_question(soup), '1')
-    except:
+            write_file_text(question_for_classification_file, extract_question(soup))
+    except Exception as inst:
         print('incorrect link: ' + link)
+        print(inst)
     driver.close()
     write_file_text(output_comment_file, reviews, '0')
+    write_file_text(comment_for_classification_file, reviews)
 
 
 def extract_question(soup):
     list_comment = soup.find('div', id='listComment')
     question_text_list = []
-    if list_comment is None:
-        list_comment = soup.find('div', id='f-comment-root')
-        contents = set(list_comment.findAll('div', class_='c-comment-box'))
-        answers = set(list_comment.findAll('div', class_='level2'))
-        questions = contents - answers
-        for question in questions:
-            q_text = question.find('div', class_='c-comment-text').getText()
-            question_text_list.append(q_text)
-            print(q_text)
-    else:
-        questions = list_comment.findAll('div', class_='f-cmt-ask', recursive=False)
-        for question in questions:
-            q_text = question.find('div', class_='f-cmmain').getText()
-            print(q_text)
+    try:
+        if list_comment is None:
+            list_comment = soup.find('div', id='f-comment-root')
+            contents = set(list_comment.findAll('div', class_='c-comment-box'))
+            answers = set(list_comment.findAll('div', class_='level2'))
+            questions = contents - answers
+            for question in questions:
+                q_text = question.find('div', class_='c-comment-text').getText()
+                question_text_list.append(q_text)
+                print(q_text)
+        else:
+            questions = list_comment.findAll('div', class_='f-cmt-ask', recursive=False)
+            for question in questions:
+                q_text = question.find('div', class_='f-cmmain').getText()
+                print(q_text)
+    except Exception as inst:
+        print(inst)
 
     return question_text_list
 
