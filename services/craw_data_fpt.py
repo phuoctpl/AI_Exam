@@ -49,7 +49,6 @@ def get_review(link):
             reviews.append(match.value)
         print(reviews)
         write_file_text(output_question_file, extract_question(soup), '1')
-        write_file_text(question_for_classification_file, extract_question(soup))
         while True:
             element0 = driver.find_element_by_id('f-comment-root')
             element = element0.find_element_by_xpath(".//i[@class='demo-icon icon-angle-right']")
@@ -60,13 +59,11 @@ def get_review(link):
             html = driver.page_source
             soup = BeautifulSoup(html, "html.parser")
             write_file_text(output_question_file, extract_question(soup), '1')
-            write_file_text(question_for_classification_file, extract_question(soup))
     except Exception as inst:
         print('incorrect link: ' + link)
         print(inst)
     driver.close()
     write_file_text(output_comment_file, reviews, '0')
-    write_file_text(comment_for_classification_file, reviews)
 
 
 def extract_question(soup):

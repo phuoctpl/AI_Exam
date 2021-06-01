@@ -21,9 +21,3 @@ def write_file_text(path, data, label):
     with io.open(path, 'a', encoding="utf-8") as output:
         for text in data:
             output.write(f"{label} {text}\n")
-
-
-def write_file_text(path, data):
-    with io.open(path, 'a', encoding="utf-8") as output:
-        for text in data:
-            output.write(f" {text}")
